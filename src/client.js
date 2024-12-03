@@ -13,4 +13,3 @@ const builder = imageUrlBuilder(client);
 
 export const urlFor = (source) => builder.image(source);
 
-console.log("check token", process.env.REACT_APP_SANITY_PROJECT)

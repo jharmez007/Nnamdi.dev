@@ -10,6 +10,8 @@ const Footer = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
 
   const { name, email, message } = formData;
 
@@ -19,7 +21,24 @@ const Footer = () => {
     setFormData({ ...formData, [name]: value })
   }
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = () => {
+    setErrorMessage("");
+
+    if (!name || !email || !message) {
+      setErrorMessage('All fields are required!');
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setErrorMessage("Please enter a valid email address");
+      return;
+    }
+  
     setLoading(true);
 
     const contact = {
@@ -33,7 +52,7 @@ const Footer = () => {
       .then(() => {
         setLoading(false);
         setIsFormSubmitted(true);
-      })
+    });
   }
 
   return (
@@ -53,10 +72,10 @@ const Footer = () => {
       {!isFormSubmitted ?
       <div className="app__footer-form app__flex">
         <div className="app__flex">
-          <input className="p-text" type="text" placeholder="Your Name" name="name" value={name} onChange={handleChangeInput} />
+          <input className="p-text" type="text" placeholder="Your Name" name="name" value={name} onChange={handleChangeInput} required />
         </div>
         <div className="app__flex">
-          <input className="p-text" type="email" placeholder="Your Email" name="email" value={email} onChange={handleChangeInput} />
+          <input className="p-text" type="email" placeholder="Your Email" name="email" value={email} onChange={handleChangeInput} required />
         </div>
         <div>
           <textarea
@@ -67,10 +86,13 @@ const Footer = () => {
             onChange={handleChangeInput} 
           />
         </div>
+        {errorMessage && (
+          <p className="error">{errorMessage}</p>
+        )}
         <button type="button" className="p-text" onClick={handleSubmit}>{loading ? 'Sending' : 'Send Message'}</button>
       </div>
       : <div>
-        <h3 className="head-text">Thank you for getting in touch!</h3>
+        <h3 className="blue-text">Thank you for getting in touch!</h3>
       </div>
       }
     </>

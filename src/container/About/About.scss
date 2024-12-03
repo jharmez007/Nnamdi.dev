@@ -13,7 +13,7 @@
 }
 
 .app__profile-item {
-    width: 190px;
+    width: 200px;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -34,6 +34,10 @@
         img {
             height: 320px; 
         }
+    }
+
+    .p-center {
+        text-align: center;
     }
 
 }

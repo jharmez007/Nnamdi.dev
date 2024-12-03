@@ -30,7 +30,7 @@ const About = () => {
           >
             <img src={urlFor(about.imgUrl)} alt={about.title} />
             <h2 
-              className="bold-text"
+              className="bold-text p-center"
               style={{ marginTop: 20 }}
             >
               {about.title}

@@ -1,9 +1,10 @@
 import React from 'react';
+import PreLoader from './components/Preloader/PreLoader';
 
 import { About, Footer, Header, Skills, Testimonial, Work } from './container';
 import { Navbar } from './components';
 import './App.scss';
-import PreLoader from './components/Preloader/PreLoader';
+
 
 const App = () => {
   return (

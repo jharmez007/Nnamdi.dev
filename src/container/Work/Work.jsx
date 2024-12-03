@@ -18,7 +18,7 @@ const Work = () => {
     client.fetch(query)
     .then((data) => {
       setWorks(data)
-      setFilterWork(data);
+      setFilterWork(data.filter((work) => work.tags.includes("All")));
     })
   }, [])
 
@@ -30,7 +30,7 @@ const Work = () => {
       setAnimateCard([{y: 0, opacity: 1}])
 
       if(item === 'All') {
-        setFilterWork(works);
+        setFilterWork(works.filter((work) => work.tags.includes(item)));
       } else {
         setFilterWork(works.filter((work) => work.tags.includes(item)))
       }

@@ -47,7 +47,7 @@
     align-items: center;
 
     .app__work-item {
-        width: 270px;
+        width: 320px;
         flex-direction: column;
 
         margin: 2rem;
@@ -67,6 +67,10 @@
             width: 470px;
             padding: 1.25rem;
             border-radius: 0.75rem;
+        }
+
+        @media screen and (max-width: 600px) {
+            width: 270px;
         }
 
         @media screen and (max-width: 300px) {
