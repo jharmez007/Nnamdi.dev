@@ -38,7 +38,7 @@ import niit from '../assets/niit.png';
 import skype from '../assets/skype.png';
 import spotify from '../assets/spotify.png';
 
-export default {
+const images = {
   email,
   mobile,
   api,
@@ -75,3 +75,5 @@ export default {
   skype,
   spotify,
 };
+
+export default images;
