@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 
 import { images } from '../../constants';
 import { AppWrap, MotionWrap } from '../../wrapper';
-import { client } from '../../client';
+import { createContact } from "../../services/contactServices";
+
 
 import './Footer.scss'
 
@@ -26,11 +27,12 @@ const Footer = () => {
     return emailRegex.test(email);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setErrorMessage("");
 
+    // Validate fields
     if (!name || !email || !message) {
-      setErrorMessage('All fields are required!');
+      setErrorMessage("All fields are required");
       return;
     }
 
@@ -38,22 +40,30 @@ const Footer = () => {
       setErrorMessage("Please enter a valid email address");
       return;
     }
-  
+
     setLoading(true);
 
     const contact = {
-      _type: 'contact',
       name: name,
       email: email,
       message: message,
-    }
+    };
 
-    client.create(contact)
-      .then(() => {
-        setLoading(false);
+    try {
+      const response = await createContact(contact);
+
+      if (response?.status === 201) {
         setIsFormSubmitted(true);
-    });
-  }
+      } else {
+        setErrorMessage(response?.message);
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      setErrorMessage("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
